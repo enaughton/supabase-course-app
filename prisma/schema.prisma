@@ -224,7 +224,7 @@ model users {
   mfa_factors                 mfa_factors[]
   sessions                    sessions[]
   profiles                    profiles?
-  todos                       todos[]
+  courses                     courses[]
 
   @@index([instance_id])
   @@schema("auth")
@@ -242,13 +242,16 @@ model profiles {
   @@schema("public")
 }
 
-model todos {
-  id          BigInt   @id @default(autoincrement())
-  user_id     String   @db.Uuid
-  task        String?
-  is_complete Boolean? @default(false)
-  inserted_at DateTime @default(dbgenerated("timezone('utc'::text, now())")) @db.Timestamptz(6)
-  users       users    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+model courses {
+  id             BigInt   @id @default(autoincrement())
+  user_id        String   @db.Uuid
+  title          String?
+  description    String?
+  materials      String?
+  estimated_time String?
+  is_public      Boolean? @default(false)
+  inserted_at    DateTime @default(dbgenerated("timezone('utc'::text, now())")) @db.Timestamptz(6)
+  users          users    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@schema("public")
 }
