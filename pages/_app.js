@@ -1,11 +1,15 @@
-import { Auth } from '@supabase/ui'
-import { supabase } from '../lib/initSupabase'
-import '../styles/index.css'
+import { Auth } from "@supabase/ui";
+import { supabase } from "../lib/initSupabase";
+import "../styles/index.css";
+import Header from "../components/Header";
 
 export default function MyApp({ Component, pageProps }) {
   return (
-    <Auth.UserContextProvider supabaseClient={supabase}>
-      <Component {...pageProps} />
-    </Auth.UserContextProvider>
-  )
+    <div className="w-full h-full bg-gray-300">
+      <Auth.UserContextProvider supabaseClient={supabase}>
+        <Header />
+        <Component {...pageProps} />
+      </Auth.UserContextProvider>
+    </div>
+  );
 }

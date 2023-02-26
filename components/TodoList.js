@@ -1,3 +1,4 @@
+import { PrismaClient } from "@prisma/client";
 import { useState, useEffect } from "react";
 import { supabase } from "../lib/initSupabase";
 
@@ -5,10 +6,6 @@ export default function Todos({ user }) {
   const [courses, setCourses] = useState([]);
   const [newCourseTitle, setNewCourseTitle] = useState("");
   const [errorText, setError] = useState("");
-
-  useEffect(() => {
-    fetchCourses();
-  }, []);
 
   const fetchCourses = async () => {
     let { data: courses, error } = await supabase
@@ -18,6 +15,7 @@ export default function Todos({ user }) {
     if (error) console.log("error", error);
     else setCourses(courses);
   };
+
   const addCourse = async (courseText) => {
     let title = courseText.trim();
     if (title.length) {
@@ -39,9 +37,10 @@ export default function Todos({ user }) {
     }
   };
 
+  console.log(fetchCourses(courses));
+
   return (
     <div className="w-full">
-      <h1 className="mb-12">Todo List.</h1>
       <div className="flex gap-2 my-2">
         <input
           className="w-full p-2 rounded"
@@ -61,11 +60,9 @@ export default function Todos({ user }) {
       <div className="overflow-hidden bg-white rounded-md shadow">
         <ul>
           {courses.map((course) => (
-            <Course
-              key={course.id}
-              course={course}
-              onDelete={() => deleteTodo(todo.id)}
-            />
+            <li key={course.id}>
+              {course.title} <span>{course.description}</span>
+            </li>
           ))}
         </ul>
       </div>
