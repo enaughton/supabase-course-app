@@ -1,7 +1,6 @@
 import { supabase } from "../lib/initSupabase";
 import { Auth } from "@supabase/ui";
 import TodoList from "../components/TodoList";
-import Header from "../components/Header";
 
 export default function IndexPage() {
   const { user } = Auth.useUser();
@@ -20,7 +19,7 @@ export default function IndexPage() {
           </div>
         </div>
       ) : (
-        <div className="flex flex-col items-center w-full h-full p-4">
+        <div>
           <TodoList user={supabase.auth.user()} />
         </div>
       )}
