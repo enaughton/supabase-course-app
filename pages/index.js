@@ -20,20 +20,8 @@ export default function IndexPage() {
           </div>
         </div>
       ) : (
-        <div
-          className="flex flex-col items-center justify-center w-full h-full p-4"
-          style={{ minWidth: 250, maxWidth: 600, margin: "auto" }}
-        >
+        <div className="flex flex-col items-center w-full h-full p-4">
           <TodoList user={supabase.auth.user()} />
-          <button
-            className="w-full mt-12 btn-black"
-            onClick={async () => {
-              const { error } = await supabase.auth.signOut();
-              if (error) console.log("Error logging out:", error.message);
-            }}
-          >
-            Logout
-          </button>
         </div>
       )}
     </div>

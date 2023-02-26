@@ -40,31 +40,22 @@ export default function Todos({ user }) {
   console.log(fetchCourses(courses));
 
   return (
-    <div className="w-full">
-      <div className="flex gap-2 my-2">
-        <input
-          className="w-full p-2 rounded"
-          type="text"
-          placeholder="make coffee"
-          value={newCourseTitle}
-          onChange={(e) => {
-            setError("");
-            setNewCourseTitle(e.target.value);
-          }}
-        />
-        <button className="btn-black" onClick={() => addCourse(newCourseTitle)}>
-          Add
-        </button>
-      </div>
+    <div className="w-1/2">
       {!!errorText && <Alert text={errorText} />}
-      <div className="overflow-hidden bg-white rounded-md shadow">
-        <ul>
-          {courses.map((course) => (
-            <li key={course.id}>
-              {course.title} <span>{course.description}</span>
-            </li>
-          ))}
-        </ul>
+      <div className="flex flex-wrap justify-center p-4 m-4 bg-white shadow">
+        {courses.map((course) => (
+          <div
+            key={course.id}
+            className="items-center p-2 m-4 border border-black rounded-lg "
+          >
+            <h3 className="text-lg">{course.title}</h3>
+            <span className="">
+              {course.description
+                ? `${course.description}`
+                : "needs a description"}
+            </span>
+          </div>
+        ))}
       </div>
     </div>
   );
