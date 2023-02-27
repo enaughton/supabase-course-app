@@ -27,15 +27,20 @@ export default function Todos({ user }) {
   };
 
   return (
-    <div className="w-full">
+    <div className="w-1/2">
+      {!!errorText && <Alert text={errorText} />}
       <div className="flex flex-wrap justify-center p-4 m-4 bg-white shadow">
         {courses.map((course) => (
           <div
             key={course.id}
-            className="items-center p-2 m-4 border border-black rounded-lg"
+            className="items-center p-2 m-4 border border-black rounded-lg "
           >
             <h3 className="text-lg">{course.title}</h3>
-            <span>{course.description}</span>
+            <span className="">
+              {course.description
+                ? `${course.description}`
+                : "needs a description"}
+            </span>
           </div>
         ))}
       </div>
